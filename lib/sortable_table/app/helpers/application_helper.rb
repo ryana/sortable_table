@@ -14,7 +14,7 @@ module SortableTable
             raise ArgumentError if opts[:name].nil? || opts[:sort].nil?
             anchor = opts[:anchor].blank? ? "" : "##{opts[:anchor]}"
             content_tag :th, 
-              link_to(opts[:name], 
+              link_to(name_with_desc(opts), 
                 sortable_url(opts) + anchor, 
                 :title => opts[:title]),
               :class => class_name_for_sortable_table_header_tag(opts)
@@ -42,6 +42,10 @@ module SortableTable
             order == 'ascending' ? 'descending' : 'ascending'
           end
           
+          def name_with_desc(opts)
+            opts[:sort].downcase == 'descending' ? opts[:name] + " (desc)" : opts[:name] + " (asc)"
+          end
+
           def sortable_url(opts)
             url_for(params.merge(:sort => opts[:sort], :order => link_sort_order(opts), :page => 1))
           end
