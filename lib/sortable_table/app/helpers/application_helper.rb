@@ -43,7 +43,7 @@ module SortableTable
           end
           
           def name_with_desc(opts)
-            opts[:sort].downcase == 'descending' ? opts[:name] + " (desc)" : opts[:name] + " (asc)"
+            link_sort_order(opts) == 'descending' ? opts[:name] + " (desc)" : opts[:name] + " (asc)"
           end
 
           def sortable_url(opts)
